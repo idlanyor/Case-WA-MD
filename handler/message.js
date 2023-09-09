@@ -259,7 +259,7 @@ module.exports = async (sock, msg) => {
 		case 'ytplay':
 			if (args.length == 0) return await reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			axios
-				.get(`https://api.lolhuman.xyz/api/ytplay?apikey=${apikey}&query=${fullArgs}`)
+				.get(`https://api.lolhuman.xyz/api/ytplay?apikey=${apikey}&query=${full_args}`)
 				.then(({ data }) => {
 					var caption = `❖ Judul    : *${data.result.title}*\n`
 						caption += `❖ Deskripsi     : *${data.result.description}*`
