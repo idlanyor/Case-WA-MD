@@ -188,7 +188,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'alquran':
-			if (args.length < 1) return reply(`Example: ${prefix + command} 18 or ${prefix + command} 18/10 or ${prefix + command} 18/1-10`)
+			if (args.length < 1) return reply(`Contoh : ${prefix + command} 18 or ${prefix + command} 18/10 or ${prefix + command} 18/1-10`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/quran/${args[0]}?apikey=${apikey}`)
 				.then(({ data }) => {
@@ -204,7 +204,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'alquranaudio':
-			if (args.length == 0) return reply(`Example: ${prefix + command} 18 or ${prefix + command} 18/10`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} 18 or ${prefix + command} 18/10`)
 			sock.sendMessage(from, { audio: { url: `https://api.lolhuman.xyz/api/quran/audio/${args[0]}?apikey=${apikey}` }, mimetype: 'audio/mp4' })
 			break
 		case 'asmaulhusna':
@@ -221,7 +221,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'kisahnabi':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Muhammad`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Muhammad`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/kisahnabi/${full_args}?apikey=${apikey}`)
 				.then(({ data }) => {
@@ -235,7 +235,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'jadwalsholat':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Yogyakarta`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Purbalingga`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/sholat/${args[0]}?apikey=${apikey}`)
 				.then(({ data }) => {
@@ -257,22 +257,20 @@ module.exports = async (sock, msg) => {
 
 		// Downloader //
 		case 'ytplay':
-			if (args.length == 0) return await reply(`Example: ${prefix + command} melukis senja`)
+			if (args.length == 0) return await reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			axios
-				.get(`https://api.lolhuman.xyz/api/ytsearch?apikey=${apikey}&query=${full_args}`)
+				.get(`https://api.lolhuman.xyz/api/ytplay?apikey=${apikey}&query=${fullArgs}`)
 				.then(({ data }) => {
-					axios.get(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${apikey}&url=https://www.youtube.com/watch?v=${data.result[0].videoId}`).then(({ data }) => {
-						var caption = `❖ Title    : *${data.result.title}*\n`
-						caption += `❖ Size     : *${data.result.size}*`
+					var caption = `❖ Judul    : *${data.result.title}*\n`
+						caption += `❖ Deskripsi     : *${data.result.description}*`
 						sock.sendMessage(from, { image: { url: data.result.thumbnail }, caption }).then(() => {
-							sock.sendMessage(from, { audio: { url: data.result.link }, mimetype: 'audio/mp4', fileName: `${data.result.title}.mp3` })
+							sock.sendMessage(from, { audio: { url: data.result.audio.link }, mimetype: 'audio/mp4', fileName: `${data.result.title}.mp3` })
 						})
-					})
 				})
 				.catch(console.error)
 			break
 		case 'ytsearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/ytsearch?apikey=${apikey}&query=${full_args}`)
 				.then(({ data }) => {
@@ -289,7 +287,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'ytmp3':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/ytaudio2?apikey=${apikey}&url=${args[0]}`)
 				.then(({ data }) => {
@@ -302,7 +300,7 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'ytmp4':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
 			axios
 				.get(`https://api.lolhuman.xyz/api/ytvideo2?apikey=${apikey}&url=${args[0]}`)
 				.then(({ data }) => {
@@ -315,27 +313,27 @@ module.exports = async (sock, msg) => {
 				.catch(console.error)
 			break
 		case 'telesticker':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://t.me/addstickers/LINE_Menhera_chan_ENG`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://t.me/addstickers/LINE_Menhera_chan_ENG`)
 			axios.get(`https://api.lolhuman.xyz/api/telestick?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				sock.sendMessage(from, { sticker: { url: data.result.sticker.random() } })
 			})
 			break
 		case 'tiktokwm':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
 			sock.sendMessage(from, { video: { url: `https://api.lolhuman.xyz/api/tiktokwm?apikey=${apikey}&url=${args[0]}` } })
 			break
 		case 'tiktoknowm':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
 			axios.get(`https://api.lolhuman.xyz/api/tiktok?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				sock.sendMessage(from, { video: { url: data.result.link }, mimetype: 'video/mp4' })
 			})
 			break
 		case 'tiktokmusic':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://vt.tiktok.com/ZSwWCk5o/`)
 			sock.sendMessage(from, { audio: { url: `https://api.lolhuman.xyz/api/tiktokmusic?apikey=${apikey}&url=${args[0]}` }, mimetype: 'audio/mp4', fileName: `${data.result.title}.mp3` })
 			break
 		case 'spotify':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://open.spotify.com/track/0ZEYRVISCaqz5yamWZWzaA`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://open.spotify.com/track/0ZEYRVISCaqz5yamWZWzaA`)
 			axios.get(`https://api.lolhuman.xyz/api/spotify?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				var caption = `Title : ${data.result.title}\n`
 				caption += `Artists : ${data.result.artists}\n`
@@ -348,7 +346,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'spotifysearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			axios.get(`https://api.lolhuman.xyz/api/spotifysearch?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var text = ''
 				for (var x of data.result) {
@@ -362,7 +360,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'jooxplay':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			axios.get(`https://api.lolhuman.xyz/api/jooxplay?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var caption = `Title : ${data.result.info.song}\n`
 				caption += `Artists : ${data.result.info.singer}\n`
@@ -376,7 +374,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'igdl':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.instagram.com/p/CJ8XKFmJ4al/?igshid=1acpcqo44kgkn`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www.instagram.com/p/CJ8XKFmJ4al/?igshid=1acpcqo44kgkn`)
 			axios.get(`https://api.lolhuman.xyz/api/instagram?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				var url = data.result[0]
 				if (url.includes('.mp4')) {
@@ -387,7 +385,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'igdl2':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.instagram.com/p/CJ8XKFmJ4al/?igshid=1acpcqo44kgkn`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www.instagram.com/p/CJ8XKFmJ4al/?igshid=1acpcqo44kgkn`)
 			axios.get(`https://api.lolhuman.xyz/api/instagram2?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				for (var x of data.result) {
 					if (x.includes('.mp4')) {
@@ -399,19 +397,19 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'twtdl':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://twitter.com/gofoodindonesia/status/1229369819511709697`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://twitter.com/gofoodindonesia/status/1229369819511709697`)
 			axios.get(`https://api.lolhuman.xyz/api/twitter?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				sock.sendMessage(from, { video: { url: data.result.link[data.result.link.length - 1].link }, mimetype: 'video/mp4' })
 			})
 			break
 		case 'fbdl':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://id-id.facebook.com/SamsungGulf/videos/video-bokeh/561108457758458/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://id-id.facebook.com/SamsungGulf/videos/video-bokeh/561108457758458/`)
 			axios.get(`https://api.lolhuman.xyz/api/facebook?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				sock.sendMessage(from, { video: { url: data.result }, mimetype: 'video/mp4' })
 			})
 			break
 		case 'zippyshare':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www51.zippyshare.com/v/5W0TOBz1/file.html`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www51.zippyshare.com/v/5W0TOBz1/file.html`)
 			axios.get(`https://api.lolhuman.xyz/api/zippyshare?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				var text = `File Name : ${data.result.name_file}\n`
 				text += `Size : ${data.result.size}\n`
@@ -421,13 +419,13 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'pinterest':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/pinterest?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				sock.sendMessage(from, { image: { url: data.result } })
 			})
 			break
 		case 'pinterest2':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/pinterest2?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				for (var x of data.result.slice(0, 5)) {
 					sock.sendMessage(from, { image: { url: x } })
@@ -435,25 +433,25 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'pinterestdl':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://id.pinterest.com/pin/696580267364426905/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://id.pinterest.com/pin/696580267364426905/`)
 			axios.get(`https://api.lolhuman.xyz/api/pinterestdl?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				sock.sendMessage(from, { image: { url: data.result[0] } })
 			})
 			break
 		case 'pixiv':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/pixiv?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				sock.sendMessage(from, { image: { url: data.result[0].image } })
 			})
 			break
 		case 'pixivdl':
-			if (args.length == 0) return reply(`Example: ${prefix + command} 63456028`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} 63456028`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/pixivdl/${args[0]}?apikey=${apikey}` } })
 			break
 
 		// AniManga //
 		case 'character':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Miku Nakano`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Miku Nakano`)
 			axios.get(`https://api.lolhuman.xyz/api/character?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var caption = `Id : ${data.result.id}\n`
 				caption += `Name : ${data.result.name.full}\n`
@@ -468,7 +466,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'manga':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Gotoubun No Hanayome`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Gotoubun No Hanayome`)
 			axios.get(`https://api.lolhuman.xyz/api/manga?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var caption = `Id : ${data.result.id}\n`
 				caption += `Id MAL : ${data.result.idMal}\n`
@@ -494,7 +492,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'anime':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Gotoubun No Hanayome`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Gotoubun No Hanayome`)
 			axios.get(`https://api.lolhuman.xyz/api/anime?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var caption = `Id : ${data.result.id}\n`
 				caption += `Id MAL : ${data.result.idMal}\n`
@@ -538,7 +536,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'kusonime':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://kusonime.com/nanatsu-no-taizai-bd-batch-subtitle-indonesia/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://kusonime.com/nanatsu-no-taizai-bd-batch-subtitle-indonesia/`)
 			axios.get(`https://api.lolhuman.xyz/api/kusonime?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				var caption = `Title : ${data.result.title}\n`
 				caption += `Japanese : ${data.result.japanese}\n`
@@ -562,7 +560,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'kusonimesearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Gotoubun No Hanayome`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Gotoubun No Hanayome`)
 			axios.get(`https://api.lolhuman.xyz/api/kusonimesearch?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var caption = `Title : ${data.result.title}\n`
 				caption += `Japanese : ${data.result.japanese}\n`
@@ -586,7 +584,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'otakudesu':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://otakudesu.tv/lengkap/pslcns-sub-indo/`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://otakudesu.tv/lengkap/pslcns-sub-indo/`)
 			axios.get(`https://api.lolhuman.xyz/api/otakudesu?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				var text = `Title : ${data.result.title}\n`
 				text += `Japanese : ${data.result.japanese}\n`
@@ -617,7 +615,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'otakudesusearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Gotoubun No Hanayome`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Gotoubun No Hanayome`)
 			axios.get(`https://api.lolhuman.xyz/api/otakudesusearch?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				var text = `Title : ${data.result.title}\n`
 				text += `Japanese : ${data.result.japanese}\n`
@@ -676,7 +674,7 @@ module.exports = async (sock, msg) => {
 
 		// Information //
 		case 'kbbi':
-			if (args.length == 0) return reply(`Example: ${prefix + command} kursi`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} kursi`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/kbbi?apikey=${apikey}&query=${full_args}`)
 			var text = `\`\`\`Kata : ${data.result[0].nama}\`\`\`\n`
 			text += `\`\`\`Kata Dasar : ${data.result[0].kata_dasar}\`\`\`\n`
@@ -692,7 +690,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'brainly':
-			if (args.length == 0) return reply(`Example: ${prefix + command} siapakah sukarno`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} siapakah sukarno`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/brainly?apikey=${apikey}&query=${full_args}`)
 			var text = 'Beberapa Pembahasan Dari Brainly :\n\n'
 			for (var x of data.result) {
@@ -704,7 +702,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'roboguru':
-			if (args.length == 0) return reply(`Example: ${prefix + command} siapakah sukarno`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} siapakah sukarno`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/roboguru?apikey=${apikey}&query=${full_args}&grade=sma&subject=sejarah`).catch((err) => console.error(err?.response?.data))
 			var text = 'Beberapa Pembahasan Dari Roboguru :\n\n'
 			for (var x of data.result) {
@@ -716,7 +714,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'jarak':
-			if (args.length == 0) return reply(`Example: ${prefix + command} jakarta - yogyakarta`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} jakarta - yogyakarta`)
 			var text1 = full_args.split('-')[0].trim()
 			var text2 = full_args.split('-')[1].trim()
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/jaraktempuh?apikey=${apikey}&kota1=${text1}&kota2=${text2}`)
@@ -755,14 +753,14 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'chord':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Melukis senja`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/chord?apikey=${apikey}&query=${full_args}`)
 			var text = `Title : ${data.result.title}\n`
 			text += `Chord : \n${data.result.chord}`
 			reply(text)
 			break
 		case 'heroml':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Fanny`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Fanny`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/heroml/${full_args}?apikey=${apikey}`)
 			var caption = `Name : ${data.result.hero_name}\n`
 			caption += `Entrance Quotes : ${data.result.ent_quotes}\n`
@@ -782,12 +780,12 @@ module.exports = async (sock, msg) => {
 			sock.sendMessage(from, { image: { url: data.result.icon }, caption })
 			break
 		case 'mlstalk':
-			if (args.length == 0) return reply(`Example: ${prefix + command} 84830127/2169`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} 84830127/2169`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/mobilelegend/${args[0]}?apikey=${apikey}`)
 			reply(data.result)
 			break
 		case 'genshin':
-			if (args.length == 0) return reply(`Example: ${prefix + command} jean`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} jean`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/genshin/${full_args}?apikey=${apikey}`)
 			var caption = `Name : ${data.result.title}\n`
 			caption += `Intro : ${data.result.intro}\n`
@@ -803,12 +801,12 @@ module.exports = async (sock, msg) => {
 			reply('Result: ' + data.result)
 			break
 		case 'wikipedia':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Tahu`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Tahu`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/wiki?apikey=${apikey}&query=${full_args}`)
 			reply(data.result)
 			break
 		case 'translate':
-			if (args.length == 0) return reply(`Example: ${prefix + command} en Tahu Bacem`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} en Tahu Bacem`)
 			var kode_negara = args[0]
 			args.shift()
 			var text = args.join(' ')
@@ -821,7 +819,7 @@ module.exports = async (sock, msg) => {
 			reply(init_txt)
 			break
 		case 'jadwaltv':
-			if (args.length == 0) return reply(`Example: ${prefix + command} RCTI`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} RCTI`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/jadwaltv/${args[0]}?apikey=${apikey}`)
 			var text = `Jadwal TV ${args[0].toUpperCase()}\n`
 			for (var x in data.result) {
@@ -894,12 +892,12 @@ module.exports = async (sock, msg) => {
 			sock.sendMessage(from, { image: { url: data.result.map }, caption })
 			break
 		case 'lirik':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Jiwa yang bersedih ghea`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/lirik?apikey=${apikey}&query=${full_args}`)
 			reply(data.result)
 			break
 		case 'cuaca':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Yogyakarta`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Yogyakarta`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/cuaca/${args[0]}?apikey=${apikey}`)
 			var text = `Tempat : ${data.result.tempat}\n`
 			text += `Cuaca : ${data.result.cuaca}\n`
@@ -929,7 +927,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'kodepos':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Slemanan or ${prefix + command} 66154`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Slemanan or ${prefix + command} 66154`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/kodepos?apikey=${apikey}&query=${full_args}`)
 			var text = `Provinsi : ${data.result[0].province}\n`
 			text += `Kabupaten : ${data.result[0].city}\n`
@@ -991,7 +989,7 @@ module.exports = async (sock, msg) => {
 
 		// Movie & Story
 		case 'lk21':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Transformer`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Transformer`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/lk21?apikey=${apikey}&query=${full_args}`)
 			var caption = `Title : ${data.result.title}\n`
 			caption += `Link : ${data.result.link}\n`
@@ -1022,7 +1020,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'wattpad':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://www.wattpad.com/707367860-kumpulan-quote-tere-liye-tere-liye-quote-quote`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://www.wattpad.com/707367860-kumpulan-quote-tere-liye-tere-liye-quote-quote`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/wattpad?apikey=${apikey}&url=${args[0]}`)
 			var caption = `Title : ${data.result.title}\n`
 			caption += `Rating : ${data.result.rating}\n`
@@ -1038,7 +1036,7 @@ module.exports = async (sock, msg) => {
 			sock.sendMessage(from, { image: { url: data.result.photo }, caption })
 			break
 		case 'wattpadsearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Tere Liye`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Tere Liye`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/wattpadsearch?apikey=${apikey}&query=${full_args}`)
 			var text = 'Wattpad Seach : \n'
 			for (var x of data.result) {
@@ -1070,14 +1068,14 @@ module.exports = async (sock, msg) => {
 		case 'gimage':
 		case 'konachan':
 		case 'wallpapersearch':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			if (command === 'wallpapersearch') {
 				command = 'wallpaper'
 			}
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/${command}?apikey=${apikey}&query=${full_args}` } })
 			break
 		case 'gimage2':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/gimage2?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				for (var x of data.result.slice(0, 5)) {
 					sock.sendMessage(from, { image: { url: x } })
@@ -1085,13 +1083,13 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'wallpapersearch2':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/wallpaper2?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				sock.sendMessage(from, { image: { url: data.result } })
 			})
 			break
 		case 'playstore':
-			if (args.length == 0) return reply(`Example: ${prefix + command} telegram`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} telegram`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/playstore?apikey=${apikey}&query=${full_args}`)
 			var text = 'Play Store Search : \n'
 			for (var x of data.result) {
@@ -1105,7 +1103,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'shopee':
-			if (args.length == 0) return reply(`Example: ${prefix + command} tas gendong`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} tas gendong`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/shopee?apikey=${apikey}&query=${full_args}`)
 			var text = 'Shopee Search : \n'
 			for (var x of data.result) {
@@ -1118,7 +1116,7 @@ module.exports = async (sock, msg) => {
 			reply(text)
 			break
 		case 'google':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			var { data } = await axios.get(`https://api.lolhuman.xyz/api/gsearch?apikey=${apikey}&query=${full_args}`)
 			var text = 'Google Search : \n'
 			for (var x of data.result) {
@@ -1166,13 +1164,13 @@ module.exports = async (sock, msg) => {
 
 		// Primbon
 		case 'artinama':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			axios.get(`https://api.lolhuman.xyz/api/artinama?apikey=${apikey}&nama=${full_args}`).then(({ data }) => {
 				reply(data.result)
 			})
 			break
 		case 'jodoh':
-			if (args.length == 0) return reply(`Example: ${prefix + command} Tahu & Bacem`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} Tahu & Bacem`)
 			axios.get(`https://api.lolhuman.xyz/api/jodoh/${full_args.split('&')[0]}/${full_args.split('&')[1]}?apikey=${apikey}`).then(({ data }) => {
 				var text = `Positif : ${data.result.positif}\n`
 				text += `Negative : ${data.result.negatif}\n`
@@ -1181,7 +1179,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'weton':
-			if (args.length == 0) return reply(`Example: ${prefix + command} 12 12 2020`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} 12 12 2020`)
 			axios.get(`https://api.lolhuman.xyz/api/weton/${args[0]}/${args[1]}/${args[2]}?apikey=${apikey}`).then(({ data }) => {
 				var text = `Weton : ${data.result.weton}\n`
 				text += `Pekerjaan : ${data.result.pekerjaan}\n`
@@ -1191,7 +1189,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'jadian':
-			if (args.length == 0) return reply(`Example: ${prefix + command} 12 12 2020`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} 12 12 2020`)
 			axios.get(`https://api.lolhuman.xyz/api/jadian/${args[0]}/${args[1]}/${args[2]}?apikey=${apikey}`).then(({ data }) => {
 				var text = `Karakteristik : ${data.result.karakteristik}\n`
 				text += `Deskripsi : ${data.result.deskripsi}`
@@ -1199,7 +1197,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'tebakumur':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			axios.get(`https://api.lolhuman.xyz/api/tebakumur?apikey=${apikey}&name=${full_args}`).then(({ data }) => {
 				var text = `Nama : ${data.result.name}\n`
 				text += `Umur : ${data.result.age}`
@@ -1330,7 +1328,7 @@ module.exports = async (sock, msg) => {
 			}
 			break
 		case 'stickerwa':
-			if (args.length == 0) return reply(`Example: ${prefix + command} loli kawaii`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} loli kawaii`)
 			axios.get(`https://api.lolhuman.xyz/api/stickerwa?apikey=${apikey}&query=${full_args}`).then(({ data }) => {
 				let pack = data.result.random()
 				let sticker = pack.stickers.random()
@@ -1340,7 +1338,7 @@ module.exports = async (sock, msg) => {
 
 		// Stalk
 		case 'stalkig':
-			if (args.length == 0) return reply(`Example: ${prefix + command} jessnolimit`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} jessnolimit`)
 			axios.get(`https://api.lolhuman.xyz/api/stalkig/${args[0]}?apikey=${apikey}`).then(({ data }) => {
 				var caption = `Username : ${data.result.username}\n`
 				caption += `Full Name : ${data.result.fullname}\n`
@@ -1352,7 +1350,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'stalkgithub':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL-Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL-Human`)
 			axios.get(`https://api.lolhuman.xyz/api/github/${args[0]}?apikey=${apikey}`).then(({ data }) => {
 				var caption = `Name : ${data.result.name}\n`
 				caption += `Link : ${data.result.url}\n`
@@ -1365,7 +1363,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'stalktwitter':
-			if (args.length == 0) return reply(`Example: ${prefix + command} jokowi`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} jokowi`)
 			axios.get(`https://api.lolhuman.xyz/api/twitter/${args[0]}?apikey=${apikey}`).then(({ data }) => {
 				var caption = `Username : ${data.result.screen_name}\n`
 				caption += `Name : ${data.result.name}\n`
@@ -1379,7 +1377,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'stalktiktok':
-			if (args.length == 0) return reply(`Example: ${prefix + command} bulansutena`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} bulansutena`)
 			axios.get(`https://api.lolhuman.xyz/api/stalktiktok/${args[0]}?apikey=${apikey}`).then(({ data }) => {
 				var caption = `Username : ${data.result.username}\n`
 				caption += `Nickname : ${data.result.nickname}\n`
@@ -1392,7 +1390,7 @@ module.exports = async (sock, msg) => {
 			})
 			break
 		case 'ai':
-			if (args.length == 0) return reply(`Example: ${prefix + command} ai adalah`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} ai adalah`)
 			axios.get(`https://api.lolhuman.xyz/api/openai?apikey=${apikey}&text=${encodeURIComponent(full_args)}&user=${senderNumber}`).then(({ data }) => {
 				reply(data.result)
 			})
@@ -1400,15 +1398,15 @@ module.exports = async (sock, msg) => {
 
 		// Other
 		case 'ssweb':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://api.lolhuman.xyz`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://api.lolhuman.xyz`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/ssweb?apikey=${apikey}&url=${args[0]}` } })
 			break
 		case 'ssweb2':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://api.lolhuman.xyz`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://api.lolhuman.xyz`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/sswebfull?apikey=${apikey}&url=${args[0]}` } })
 			break
 		case 'shortlink':
-			if (args.length == 0) return reply(`Example: ${prefix + command} https://api.lolhuman.xyz`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} https://api.lolhuman.xyz`)
 			axios.get(`https://api.lolhuman.xyz/api/ouoshortlink?apikey=${apikey}&url=${args[0]}`).then(({ data }) => {
 				reply(data.result)
 			})
@@ -1545,7 +1543,7 @@ module.exports = async (sock, msg) => {
 		case 'summersand':
 		case 'horrorblood':
 		case 'thunder':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/textprome/${command}?apikey=${apikey}&text=${full_args}` } })
 			break
 
@@ -1559,7 +1557,7 @@ module.exports = async (sock, msg) => {
 		case 'wolflogo':
 		case 'steel3d':
 		case 'wallgravity':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/textprome2/${command}?apikey=${apikey}&text1=${args[0]}&text2=${args[1]}` } })
 			break
 
@@ -1588,7 +1586,7 @@ module.exports = async (sock, msg) => {
 		case 'flamming':
 		case 'harrypotter':
 		case 'carvedwood':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/photooxy1/${command}?apikey=${apikey}&text=${full_args}` } })
 			break
 
@@ -1596,7 +1594,7 @@ module.exports = async (sock, msg) => {
 		case 'arcade8bit':
 		case 'battlefield4':
 		case 'pubg':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/photooxy2/${command}?apikey=${apikey}&text1=${args[0]}&text2=${args[1]}` } })
 			break
 
@@ -1631,7 +1629,7 @@ module.exports = async (sock, msg) => {
 		case 'goldplaybutton':
 		case 'silverplaybutton':
 		case 'freefire':
-			if (args.length == 0) return reply(`Example: ${prefix + command} LoL Human`)
+			if (args.length == 0) return reply(`Contoh : ${prefix + command} LoL Human`)
 			sock.sendMessage(from, { image: { url: `https://api.lolhuman.xyz/api/ephoto1/${command}?apikey=${apikey}&text=${full_args}` } })
 			break
 		default:
